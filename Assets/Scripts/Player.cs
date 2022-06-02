@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        col.gameObject.GetComponent<IObstacle>()?.ToHitSpaceship(this);
+        col.gameObject.GetComponent<Obstacle>()?.ToHitSpaceship(this);
     }
     
 }

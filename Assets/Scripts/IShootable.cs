@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IObstacle
+public interface IShootable
 {
-    void ToHitSpaceship(Player player);
+    void OnShotHit();
 }

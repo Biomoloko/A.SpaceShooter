@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Star : MonoBehaviour, IObstacle
+public class Star : Obstacle
 {
-    public void ToHitSpaceship(Player player)
+    private void Awake()
+    {
+        minSpeed = 2;
+        maxSpeed = 3;
+    }
+    
+    public override void ToHitSpaceship(Player player)
     {
         player.StarsQuantity(1);
-        Destroy(gameObject);
+        EffectBehaviour();
     }
 }
