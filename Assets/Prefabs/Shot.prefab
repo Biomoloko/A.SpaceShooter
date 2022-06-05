@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7836527721676627543}
   - component: {fileID: 4351403236059795870}
   - component: {fileID: -475108823732039798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4351403236059795870
 MonoBehaviour:
   m_ObjectHideFlags: 0

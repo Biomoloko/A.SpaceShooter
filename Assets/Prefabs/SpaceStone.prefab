@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -9123557758262323425}
   - component: {fileID: 221890423}
   - component: {fileID: 5544094842343975234}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpaceStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,9 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSpeed: 0
+  minSpeed: 50
+  maxSpeed: 80
   obstacleCollisionEffect: {fileID: 2048375079111725601, guid: 244646019c4a8ca449e593626ad7d0d7, type: 3}
   damage: 1
-  badCollison: {fileID: 2048375079111725601, guid: 244646019c4a8ca449e593626ad7d0d7, type: 3}
 --- !u!58 &221890423
 CircleCollider2D:
   m_ObjectHideFlags: 0

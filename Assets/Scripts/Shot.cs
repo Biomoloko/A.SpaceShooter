@@ -16,5 +16,6 @@ public class Shot : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         col.gameObject.GetComponent<IShootable>()?.OnShotHit();
+        Destroy(gameObject);
     }
 }

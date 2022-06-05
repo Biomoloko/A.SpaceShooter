@@ -6,13 +6,13 @@ public abstract class Obstacle : MonoBehaviour
 {
     public abstract void ToHitSpaceship(Player player);
 
-    [SerializeField]
-    protected float obstacleSpeed = 0;
 
-    protected float minSpeed;
-    protected float maxSpeed;
-    [SerializeField]
-    protected ParticleSystem obstacleCollisionEffect;
+    [SerializeField] protected float obstacleSpeed = 0;
+
+    [SerializeField] protected float minSpeed;
+    [SerializeField] protected float maxSpeed;
+
+    [SerializeField] protected ParticleSystem obstacleCollisionEffect;
 
     Rigidbody2D rb;
     private void Start()
@@ -22,7 +22,8 @@ public abstract class Obstacle : MonoBehaviour
     }
     private void Update()
     {
-        rb.AddForce(Vector3.down * obstacleSpeed * Time.deltaTime, ForceMode2D.Force);
+        ///rb.AddForce(Vector3.down * obstacleSpeed * Time.deltaTime, ForceMode2D.Force);
+        rb.velocity = Vector3.down * obstacleSpeed * Time.deltaTime;
     }
     protected void EffectBehaviour()
     {
