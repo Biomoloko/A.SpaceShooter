@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void OnDestroyObstacle(Obstacle obstacle);
 public abstract class Obstacle : MonoBehaviour
 {
+    public OnDestroyObstacle onDesObs;
     public abstract void ToHitSpaceship(Player player);
 
 
@@ -19,6 +21,7 @@ public abstract class Obstacle : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         obstacleSpeed = Random.Range(minSpeed,maxSpeed);
+        TestMethod<>();
     }
     private void Update()
     {
@@ -29,6 +32,14 @@ public abstract class Obstacle : MonoBehaviour
     {
         ParticleSystem myEffect = Instantiate(obstacleCollisionEffect, transform.position, Quaternion.identity);
         Destroy(myEffect.gameObject, 1f);
-        Destroy(gameObject);
+        onDesObs.Invoke(this);
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        onDesObs.Invoke(this);
+    }
+    public void TestMethod<T>(T testParam) where T:MonoBehaviour
+    {
+        Debug.Log(testParam);
     }
 }
