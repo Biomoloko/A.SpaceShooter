@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IShootable
 {
-    [SerializeField] private int health;
+    [SerializeField] private float health;
+    [SerializeField] private float currentMaxHealth;
     [SerializeField] private int starsCount;
-    void Start()
-    { 
+    [SerializeField] private Image healthImage;
+    private void Awake()
+    {
+        
     }
     private void OnMouseDrag()
     {
@@ -19,6 +23,7 @@ public class Player : MonoBehaviour
     public void ChangeHealth(int healthDelta)
     {
         health += healthDelta;
+        VisualManager.instance.Drawator(healthImage, health, currentMaxHealth);
     }
     public void StarsQuantity(int starsDelta)
     {
@@ -28,5 +33,9 @@ public class Player : MonoBehaviour
     {
         col.gameObject.GetComponent<Obstacle>()?.ToHitSpaceship(this);
     }
-    
+
+    public void OnShotHit()
+    {
+        Debug.Log("OUCH !!");
+    }
 }

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))] 
-public class Shot : PoolObject
+public class EnemyShot : PoolObject
 {
     [SerializeField] private float shotSpeed;
     [SerializeField] private Rigidbody2D rb;
@@ -24,11 +23,7 @@ public class Shot : PoolObject
     private void OnEnable()
     {
         rb.velocity = Vector3.zero;
-        rb.AddForce(Vector3.up * shotSpeed, ForceMode2D.Impulse);
+        rb.AddForce(Vector3.down * shotSpeed, ForceMode2D.Impulse);
         Invoke(nameof(InvokeDestroyer), 2f);
     }
-    //private void OnDisable()
-    //{
-    //    CancelInvoke();
-    //}
 }

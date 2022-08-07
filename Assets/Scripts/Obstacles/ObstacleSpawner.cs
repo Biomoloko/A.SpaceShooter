@@ -17,7 +17,8 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField]
     private List<GameObject> spawnObjects;
 
-    private Utility ourPool;
+    private Utility<Asteroid> asteroidPool;
+    private Utility<Star> starPool;
     void Start()
     {
         hightPoint = Camera.main.orthographicSize + Camera.main.transform.position.y + verticalBorderOffset;
@@ -26,9 +27,13 @@ public class ObstacleSpawner : MonoBehaviour
         float myAspect = Camera.main.orthographicSize * Camera.main.aspect;
         leftP = Camera.main.transform.position.x - myAspect;
         rightP = Camera.main.transform.position.x + myAspect;
-        SpawnOurObjects();
 
-        ourPool = FindObjectOfType<Utility>();
+        //Ёкземпл€ры классса Utility с типами объектов
+        asteroidPool = new Utility<Asteroid>();
+        starPool = new Utility<Star>();
+        //дважды вызываем метод с разными параметрами, <> не ставили потому, что метод автоматически становитс€ типом параметров
+        SpawnOurObjects(asteroidPool);
+        SpawnOurObjects(starPool);
     }
 
     private void OnApplicationQuit()
@@ -36,7 +41,7 @@ public class ObstacleSpawner : MonoBehaviour
         isGaming = false;
     }
 
-    private async void SpawnOurObjects ()
+    private async void SpawnOurObjects<T> (Utility<T> poolObject) where T : PoolObject
     {
         await Task.Delay(4000);
         while(isGaming == true)
@@ -45,9 +50,10 @@ public class ObstacleSpawner : MonoBehaviour
 
             ///Instantiate(spawnObjects[Random.Range(0,spawnObjects.Count)], new Vector3(randomXPositon, hightPoint,0), Quaternion.identity); (устаревший спавн астероида,(дл€ справки))
             ///
-            Obstacle getedSpawnObject = ourPool.pool.Get();
+            T getedSpawnObject = poolObject.pool.Get();
             getedSpawnObject.transform.position = new Vector3(randomXPositon, hightPoint, 0);
             await Task.Delay(Random.Range(500,2000));
         }
     }
+    
 }

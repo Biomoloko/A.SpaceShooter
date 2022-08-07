@@ -10,8 +10,10 @@ public class ShootingLogic : MonoBehaviour
     private GameObject shot;
     [SerializeField]
     private Transform shooterTransform;
+    private Utility<Shot> shotPool;
     void Start()
     {
+        shotPool = new Utility<Shot>();
         StartCoroutine(Shooting());
     }
 
@@ -25,7 +27,9 @@ public class ShootingLogic : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(shootingInterval);
-            Instantiate(shot, shooterTransform.position, Quaternion.identity);
+            Shot currentShot = shotPool.pool.Get();
+            currentShot.transform.position = shooterTransform.position;
+
         }
         
         

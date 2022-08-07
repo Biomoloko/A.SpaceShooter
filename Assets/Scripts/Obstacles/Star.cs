@@ -8,6 +8,6 @@ public class Star : Obstacle
     public override void ToHitSpaceship(Player player)
     {
         player.StarsQuantity(1);
-        EffectBehaviour();
+        EffectBehaviour(ParticleTypes.Star);
     }
 }

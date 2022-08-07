@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void OnDestroyObstacle(Obstacle obstacle);
-public abstract class Obstacle : MonoBehaviour
+public abstract class Obstacle : PoolObject
+    ///public abstract class Obstacle<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public OnDestroyObstacle onDesObs;
+    //public OnDestroyObstacle onDesObs;
     public abstract void ToHitSpaceship(Player player);
-
 
     [SerializeField] protected float obstacleSpeed = 0;
 
@@ -21,25 +20,26 @@ public abstract class Obstacle : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         obstacleSpeed = Random.Range(minSpeed,maxSpeed);
-        TestMethod<>();
     }
     private void Update()
     {
         ///rb.AddForce(Vector3.down * obstacleSpeed * Time.deltaTime, ForceMode2D.Force);
         rb.velocity = Vector3.down * obstacleSpeed * Time.deltaTime;
     }
-    protected void EffectBehaviour()
+    protected void EffectBehaviour(ParticleTypes particleTypes)
     {
-        ParticleSystem myEffect = Instantiate(obstacleCollisionEffect, transform.position, Quaternion.identity);
-        Destroy(myEffect.gameObject, 1f);
-        onDesObs.Invoke(this);
+        ParticleSpawner.instance.GetParticles(particleTypes).transform.position = transform.position;
+        //ParticleSystem myEffect = Instantiate(obstacleCollisionEffect, transform.position, Quaternion.identity);
+        //Destroy(myEffect.gameObject, 1f);
+        //onDesObs.Invoke(this);
+        OnDesObj.Invoke(this);
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
-        onDesObs.Invoke(this);
+        OnDesObj.Invoke(this);
     }
-    public void TestMethod<T>(T testParam) where T:MonoBehaviour
+    public void TestMethod<T>(T testParam) where T : MonoBehaviour
     {
-        Debug.Log(testParam);
+        testParam.enabled = false;
     }
 }

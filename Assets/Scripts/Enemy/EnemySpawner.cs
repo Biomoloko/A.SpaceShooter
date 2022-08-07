@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-
-    private static Enemy firstEnemy;
+    private static Utility<Enemy> enemyPool;
     [SerializeField] private bool alive;
     void Start()
     {
-        StartCoroutine(Spawner());
-        if (firstEnemy == null)
+        if(enemyPool == null)
+        {
+            enemyPool = new Utility<Enemy>();
+        }
+        
+
+        /*if (firstEnemy == null)
         {
             firstEnemy = Resources.Load<Enemy>("Prefabs/EnemyFirst");
         }
+        */
+       StartCoroutine(Spawner());
+        
     }
 
     void Update()
@@ -33,10 +40,11 @@ public class EnemySpawner : MonoBehaviour
             }
             alive = true;
             
-            Enemy currentEnemy = Instantiate(firstEnemy, transform.position, Quaternion.identity);
+            Enemy currentEnemy = enemyPool.pool.Get();
+            currentEnemy.transform.position = transform.position;
+            currentEnemy.IfTurnedOn();
             currentEnemy.OnDeath += () => alive = false;
         }
     }
     //private void AliveSwitcher() => alive = false;
-    
 }

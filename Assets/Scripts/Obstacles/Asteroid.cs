@@ -9,11 +9,12 @@ public class Asteroid : Obstacle, IShootable
     public override void ToHitSpaceship(Player player)
     {
         player.ChangeHealth(-damage);
-        EffectBehaviour();
+        EffectBehaviour(ParticleTypes.Asteoid);
     }
 
     public void OnShotHit()
     {
-        EffectBehaviour();
+        EffectBehaviour(ParticleTypes.Asteoid);
     }
 }
+
