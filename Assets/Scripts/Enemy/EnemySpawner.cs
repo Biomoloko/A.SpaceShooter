@@ -32,6 +32,10 @@ public class EnemySpawner : MonoBehaviour
         while(true)
         {
             yield return new WaitUntil(()=>alive == false);
+
+            if (GameManager.isGaming == false)
+                break;
+
             int chance = Random.Range(0, 10);
             if (chance != 0)
             {

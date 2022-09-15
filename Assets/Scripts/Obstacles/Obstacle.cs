@@ -8,10 +8,13 @@ public abstract class Obstacle : PoolObject
     //public OnDestroyObstacle onDesObs;
     public abstract void ToHitSpaceship(Player player);
 
-    [SerializeField] protected float obstacleSpeed = 0;
-
+    protected float obstacleSpeed;
     [SerializeField] protected float minSpeed;
     [SerializeField] protected float maxSpeed;
+
+     protected float rotationSpeed;
+    [SerializeField] protected float minRotSpeed;
+    [SerializeField] protected float maxRotSpeed;
 
     [SerializeField] protected ParticleSystem obstacleCollisionEffect;
 
@@ -20,11 +23,12 @@ public abstract class Obstacle : PoolObject
     {
         rb = GetComponent<Rigidbody2D>();
         obstacleSpeed = Random.Range(minSpeed,maxSpeed);
+        rotationSpeed = Random.Range(minRotSpeed, maxRotSpeed);
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        ///rb.AddForce(Vector3.down * obstacleSpeed * Time.deltaTime, ForceMode2D.Force);
-        rb.velocity = Vector3.down * obstacleSpeed * Time.deltaTime;
+        rb.velocity = Vector3.down * obstacleSpeed;
+        transform.Rotate(0,0,rotationSpeed);
     }
     protected void EffectBehaviour(ParticleTypes particleTypes)
     {

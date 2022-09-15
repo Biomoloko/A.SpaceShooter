@@ -13,7 +13,6 @@ public class ObstacleSpawner : MonoBehaviour
     private const float verticalBorderOffset = 1.5f;
 
 
-    private bool isGaming = true;
     [SerializeField]
     private List<GameObject> spawnObjects;
 
@@ -36,15 +35,11 @@ public class ObstacleSpawner : MonoBehaviour
         SpawnOurObjects(starPool);
     }
 
-    private void OnApplicationQuit()
-    {
-        isGaming = false;
-    }
 
     private async void SpawnOurObjects<T> (Utility<T> poolObject) where T : PoolObject
     {
         await Task.Delay(4000);
-        while(isGaming == true)
+        while(GameManager.isGaming == true)
         { 
             float randomXPositon = Random.Range(leftP, rightP);
 

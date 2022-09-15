@@ -10,8 +10,6 @@ public class Utility<T> where T : PoolObject
     private T prefab;
     public Utility()
     {
-        //asteroid = Resources.Load<Asteroid>("Prefabs/Asteroid");
-        //star = Resources.Load<Star>("Prefabs/Star");
         prefab = Resources.Load<T>($"Prefabs/{typeof(T).Name}");
         pool = new ObjectPool<T>(OnCreate, OnGet, OnRelease, OnObjectDestroy, true, 5, 15);
     }

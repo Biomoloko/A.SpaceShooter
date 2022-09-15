@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8046d774e9a8ea346b8df0044a087329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: 0
-  minSpeed: 50
-  maxSpeed: 80
+  minSpeed: 2
+  maxSpeed: 5
+  minRotSpeed: -1.5
+  maxRotSpeed: 1.5
   obstacleCollisionEffect: {fileID: 2048375079111725601, guid: 244646019c4a8ca449e593626ad7d0d7, type: 3}
   damage: 15
 --- !u!58 &221890423

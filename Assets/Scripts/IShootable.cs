@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IShootable
 {
     void OnShotHit();
+    int myCost { get; set; }
 }

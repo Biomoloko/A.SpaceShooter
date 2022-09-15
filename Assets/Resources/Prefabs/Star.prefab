@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83877d413442e364786e3dd14520978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: 0
-  minSpeed: 200
-  maxSpeed: 200
+  minSpeed: 3
+  maxSpeed: 6
+  minRotSpeed: -3
+  maxRotSpeed: 3
   obstacleCollisionEffect: {fileID: 6029683190071879068, guid: 513589aba2baa93428b91604f628cf0c, type: 3}
 --- !u!58 &5289976898942604270
 CircleCollider2D:

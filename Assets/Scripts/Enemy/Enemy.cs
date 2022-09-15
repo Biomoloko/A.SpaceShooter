@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 public class Enemy : PoolObject, IShootable
 {
     public Action OnDeath;
@@ -11,13 +12,23 @@ public class Enemy : PoolObject, IShootable
     [SerializeField] private float cameraBorder;
     [SerializeField] private float enemySpeed;
     [SerializeField] protected ParticleSystem destroyEffect;
+    [SerializeField] private Image healthImage;
+    private float health;
+    [SerializeField] private float maxHealth;
+
+    //цена врага
+    //[SerializeField] private int enemyCost = 10;
+
     private bool alive;
     private static Utility<EnemyShot> enemyShot;
     public Transform enemyShooter;
     public float shootInterval = 2f;
+    public int myCost { get; set; } = 10;
 
     private void OnEnable()
     {
+        health = maxHealth;
+        VisualManager.instance.Drawator(healthImage, health, maxHealth);
         alive = true;
         StartCoroutine(Shooting());
     }
@@ -27,9 +38,16 @@ public class Enemy : PoolObject, IShootable
     }
     public void OnShotHit()
     {
-        EffectBehaviour();
-        OnDesObj.Invoke(this);
-        OnDeath.Invoke();
+        health -= 1;
+        VisualManager.instance.Drawator(healthImage, health, maxHealth);
+        if (health == 0)
+        {
+            EffectBehaviour();
+            OnDesObj.Invoke(this);
+            OnDeath.Invoke();
+
+            Player.instance.CountScore(myCost);
+        }
     }
     void Awake()
     {
